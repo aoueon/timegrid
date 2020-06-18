@@ -1,4 +1,20 @@
 .c-card {
+    height: 100%;
     padding: 1.2em;
     @include outer;
-}
+    min-height: 33vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    > *:first-child {
+        flex: 1;
+        > *:first-child {
+            > *:first-child {
+                margin-bottom: auto;
+            }
+        }
+    }
+    @include laptop {
+        min-height: 0;
+    }
+}  

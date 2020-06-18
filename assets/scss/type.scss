@@ -1,6 +1,6 @@
 $min_width: 320px;
-$max_width: 1200px;
-$min_font: 18px;
+$max_width: 1440px;
+$min_font: 19px;
 $max_font: 24px;
 
 :root {
@@ -25,7 +25,16 @@ h2 {
 h3 {
     font-size: 1.6em;
 }
-
+h4 {
+    font-size: 1.2em;
+}
+h5 {
+    font-size: 0.8em;
+}
+h6 {
+    font-size: 0.6em;
+    line-height: 1.5;
+}
 
 @for $i from 1 to 7 {
     .h#{$i} {
@@ -36,4 +45,13 @@ h3 {
 
 .t-gray {
     color: $color-gray;
+}
+
+a {
+    // border-bottom: 2px solid $color-gray;
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+    &:hover {
+        text-decoration: underline;
+    }
 }

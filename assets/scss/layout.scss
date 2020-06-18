@@ -24,4 +24,9 @@ $border: 3px solid $color-dark;
     @include outer;
     text-align: center;
     border-bottom: $border;
+    // box-shadow: inset 0 0 10px #ff000029;
+}
+.g-footer {
+    border-top: $border;
+    margin-top: -3px;
 }
