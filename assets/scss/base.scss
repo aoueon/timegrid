@@ -1,0 +1,772 @@
+/* 
+Table of contents
+
+    1. Normalize
+    2. Media Breakpoints
+    3. Layout Modifiers
+
+*/
+
+/* Normalize */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    word-break: break-word;
+    &,
+    &::before,
+    &::after {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+}
+
+:root {
+    font-family: sans-serif;
+
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-variant-ligatures: none;
+    -webkit-font-variant-ligatures: none;
+
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+h1,
+.h1 {
+    font-size: 2.6rem;
+}
+h2,
+.h2 {
+    font-size: 2.1rem;
+}
+h3,
+.h3 {
+    font-size: 1.6rem;
+}
+h4,
+.h4 {
+    font-size: 1.3rem;
+}
+h5,
+.h5 {
+    font-size: 1rem;
+}
+h6,
+.h6 {
+    font-size: 0.8rem;
+}
+
+dt {
+    @extend h4;
+}
+dd {
+    padding-left: 1em;
+    @at-root dt + & {
+        margin-top: 0.4em;
+    }
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    text-decoration-skip-ink: auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border: 0;
+}
+
+iframe,
+embed,
+canvas,
+figure {
+    max-width: 100%;
+}
+
+input,
+select,
+textarea,
+button {
+    -webkit-appearance: none;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+select {
+    &::-ms-expand {
+        display: none;
+    }
+}
+
+select,
+label {
+    cursor: pointer;
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top;
+    height: auto;
+    resize: vertical;
+    width: 100%;
+    min-height: 1.6rem;
+}
+[type="range"] {
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+button,
+[type="submit"],
+[type="button"],
+[type="reset"] {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@supports (-webkit-tap-highlight-color: transparent) {
+    a,
+    button,
+    [type="submit"],
+    [type="button"],
+    [type="reset"] {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-touch-callout: none;
+    }
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+:active,
+:hover,
+:focus {
+    outline: 0;
+}
+
+[hidden] {
+    display: none;
+}
+
+[disabled] {
+    cursor: not-allowed;
+}
+
+nav {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    li {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: gray;
+    margin: 1rem 0;
+}
+
+em,
+i,
+.i {
+    font-style: italic;
+}
+strong,
+b,
+.b {
+    font-weight: 500;
+}
+u,
+.u {
+    text-decoration: underline;
+}
+sub,
+sup {
+    font-size: 0.7em;
+}
+sub {
+    vertical-align: sub;
+}
+sup {
+    vertical-align: super;
+}
+del,
+s {
+    text-decoration: line-through;
+}
+abbr,
+dfn,
+acronym,
+time {
+    border-bottom: 1px dashed gray;
+    text-decoration: none;
+    font-style: normal;
+}
+ins {
+    text-decoration: underline;
+}
+address {
+    display: block;
+    font-style: italic;
+}
+
+mark {
+    background-color: rgba(249, 186, 13, 0.55);
+}
+
+small {
+    font-size: 0.75em;
+}
+big {
+    font-size: 1.25em;
+}
+
+cite {
+    font-style: italic;
+}
+q {
+    font-style: italic;
+}
+
+nav {
+    ul,
+    li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+pre,
+code {
+    white-space: pre-wrap;
+}
+
+:focus {
+    box-shadow: 0 0 5px rgba(black, 0.2);
+}
+
+@media print {
+    nav,
+    form,
+    button {
+        display: none;
+    }
+}
+
+/* Media Breakpoints */
+@mixin desktop {
+    @media (max-width: 1440px) {
+        @content;
+    }
+}
+@mixin laptop {
+    @media (max-width: 1200px) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media (max-width: 991px) {
+        @content;
+    }
+}
+@mixin phone {
+    @media (max-width: 767px) {
+        @content;
+    }
+}
+@mixin phone-l {
+    @media (max-width: 576px) {
+        @content;
+    }
+}
+// iPhone X, 8
+@mixin phone-m {
+    @media (max-width: 375px) {
+        @content;
+    }
+}
+// iPhone SE
+@mixin phone-s {
+    @media (max-width: 320px) {
+        @content;
+    }
+}
+@mixin desktop-up {
+    @media (min-width: 1441px) {
+        @content;
+    }
+}
+@mixin laptop-up {
+    @media (min-width: 1201px) {
+        @content;
+    }
+}
+@mixin tablet-up {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+@mixin phone-up {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+@mixin phone-l-up {
+    @media (min-width: 577px) {
+        @content;
+    }
+}
+// iPhone X, 8
+@mixin phone-m-up {
+    @media (min-width: 376px) {
+        @content;
+    }
+}
+// iPhone SE
+@mixin phone-s-up {
+    @media (min-width: 321px) {
+        @content;
+    }
+}
+
+@mixin dark {
+    @media screen and (prefers-color-scheme: dark) {
+        @content;
+    }
+}
+
+// Function to apply rules starting at a breakpoint
+
+// Generate responsive classes {
+@mixin on-breakpoints {
+    // @content;
+    &-desktop {
+        @include desktop {
+            @content;
+        }
+    }
+    &-laptop {
+        @include laptop {
+            @content;
+        }
+    }
+    &-tablet {
+        @include tablet {
+            @content;
+        }
+    }
+    &-phone {
+        @include phone {
+            @content;
+        }
+    }
+    &-phone-l {
+        @include phone-l {
+            @content;
+        }
+    }
+    &-phone-m {
+        @include phone-m {
+            @content;
+        }
+    }
+    &-phone-s {
+        @include phone-s {
+            @content;
+        }
+    }
+}
+
+// Grid Columns with breakpoint helpers
+@mixin columns-generator($suffix: "") {
+    @for $i from 1 to 13 {
+        .of-#{$i}#{$suffix} {
+            width: #{100%/12 * $i};
+        }
+        .l-grid.of-#{$i}#{$suffix} {
+            width: auto;
+            > * {
+                width: #{100%/12 * $i};
+            }
+        }
+    }
+}
+@include columns-generator();
+@include desktop {
+    @include columns-generator("-desktop");
+}
+@include laptop {
+    @include columns-generator("-laptop");
+}
+@include tablet {
+    @include columns-generator("-tablet");
+}
+@include phone {
+    @include columns-generator("-phone");
+}
+@include phone-l {
+    @include columns-generator("-phone-l");
+}
+@include phone-m {
+    @include columns-generator("-phone-m");
+}
+@include phone-s {
+    @include columns-generator("-phone-s");
+}
+
+/* Layout Patterns */
+.l-grid {
+    display: flex;
+    flex-flow: row wrap;
+}
+.l-bunch {
+    display: flex;
+    flex-flow: row wrap;
+}
+.l-frame {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+.l-bar {
+    display: flex;
+    flex-wrap: wrap;
+    > :first-child {
+        margin-right: auto;
+    }
+}
+.l-stack {
+    display: flex;
+    flex-flow: column nowrap;
+}
+.l-ratio {
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+    width: 100%;
+    display: block;
+    > * {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        max-width: 100%;
+        max-height: 100%;
+    }
+    /* variations */
+    &.is-wide {
+        padding-bottom: 56.25%;
+    }
+}
+
+/* Layout Modifiers */
+// MODIFIERS
+.f-fill {
+    flex: 1;
+}
+.f-auto {
+    flex: 0 0 auto;
+}
+.mr-auto {
+    margin-right: auto;
+}
+
+// Justify Content
+
+.to-start,
+.to-sides,
+.to-around,
+.to-center,
+.to-end {
+    display: flex;
+}
+
+.to-start {
+    justify-content: flex-start;
+}
+.to-sides {
+    justify-content: space-between;
+}
+.to-around {
+    justify-content: space-around;
+}
+.to-center {
+    justify-content: center;
+}
+.to-end {
+    justify-content: flex-end;
+}
+
+.to-start {
+    @include on-breakpoints() {
+        justify-content: flex-start;
+    }
+}
+.to-sides {
+    @include on-breakpoints() {
+        justify-content: space-between;
+    }
+}
+.to-around {
+    @include on-breakpoints() {
+        justify-content: space-around;
+    }
+}
+.to-center {
+    @include on-breakpoints() {
+        justify-content: center;
+    }
+}
+.to-end {
+    @include on-breakpoints() {
+        justify-content: flex-end;
+    }
+}
+
+// Flex Direction
+.in-column {
+    @include on-breakpoints() {
+        flex-direction: column;
+    }
+}
+.in-row {
+    flex-direction: row;
+    @include on-breakpoints() {
+        flex-direction: row;
+    }
+}
+
+// Align Items
+
+.align-start,
+.align-center,
+.align-end,
+.align-stretch {
+    display: flex;
+}
+
+.align-start {
+    align-items: flex-start;
+}
+.align-center {
+    align-items: center;
+}
+.align-end {
+    align-items: flex-end;
+}
+.align-stretch {
+    align-items: stretch;
+}
+.align-baseline {
+    align-items: baseline;
+}
+
+// Align content
+
+.align-content-start,
+.align-content-center,
+.align-content-end,
+.align-content-stretch {
+    display: flex;
+}
+
+.align-content-start {
+    align-content: flex-start;
+}
+.align-content-between {
+    align-content: space-between;
+}
+.align-content-around {
+    align-content: space-around;
+}
+.align-content-center {
+    align-content: center;
+}
+.align-content-end {
+    align-content: flex-end;
+}
+.align-content-stretch {
+    align-content: stretch;
+}
+.align-content-baseline {
+    align-content: baseline;
+}
+
+// Display
+.d-block {
+    display: block;
+}
+.d-flex {
+    display: flex;
+}
+.is-hidden {
+    @include on-breakpoints() {
+        display: none;
+    }
+}
+.is-visible {
+    &,
+    &-desktop,
+    &-tablet,
+    &-phone {
+        display: none;
+    }
+}
+.is-visible {
+    @include on-breakpoints() {
+        display: block;
+    }
+}
+
+// Width & height
+.w-fill {
+    width: 100%;
+    display: block;
+}
+.w-full {
+    width: 100vw;
+}
+.h-fill {
+    height: 100%;
+    display: block;
+}
+.h-full {
+    height: 100vh;
+}
+
+// Ordering
+.order-0 {
+    @include on-breakpoints() {
+        order: -1;
+    }
+}
+.order-1 {
+    @include on-breakpoints() {
+        order: 1;
+    }
+}
+.order-2 {
+    @include on-breakpoints() {
+        order: 2;
+    }
+}
+.order-3 {
+    @include on-breakpoints() {
+        order: 3;
+    }
+}
+
+// Gap
+@mixin gap($col, $row: $col) {
+    margin: -#{$row} -#{$col/2} 0;
+    > * {
+        padding: $row #{$col/2} 0;
+    }
+}
+@mixin vgap($row) {
+    > * + * {
+        margin: 0;
+        margin-top: $row;
+    }
+}
+
+/* Fonts */
+$font-fallback: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+.text-center {
+    text-align: center;
+}
+
+@mixin clear-floats {
+    &::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+}
+
+@mixin h-scroll {
+    white-space: nowrap;
+    overflow: auto;
+    display: block;
+    width: 100%;
+    > * {
+        white-space: normal;
+        display: inline-block;
+    }
+}
+
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+.text-right {
+    text-align: right;
+}

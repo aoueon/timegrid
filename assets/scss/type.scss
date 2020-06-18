@@ -1,0 +1,39 @@
+$min_width: 320px;
+$max_width: 1200px;
+$min_font: 18px;
+$max_font: 24px;
+
+:root {
+    color: $color-t;
+    font-family: "JetBrains Mono", $font-fallback;
+    @include fluid-type($min_width, $max_width, $min_font, $max_font);
+}
+
+h1,
+h2,
+h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1;
+}
+h1 {
+    font-size: 5em;
+}
+h2 {
+    font-size: 2.6em;
+}
+h3 {
+    font-size: 1.6em;
+}
+
+
+@for $i from 1 to 7 {
+    .h#{$i} {
+        @extend h#{$i};
+        margin: 0;
+    }
+}
+
+.t-gray {
+    color: $color-gray;
+}

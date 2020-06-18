@@ -1,0 +1,16 @@
+.a-progress {
+    background-color: #A39F8B;
+    border-radius: 100px;
+    height: .5em;
+    padding: 1px;
+    &::before {
+        content: "";
+        display: block;
+        height: calc(.5em - 2px);
+        width: 0;
+        min-width: calc(.5em - 2px);
+        border-radius: 100px;
+        background-color: #9A7C58;
+        box-shadow: 0 0 .5em #FF9900;
+    }
+}

@@ -1,0 +1,9 @@
+.m-cards {
+    > .l-grid {
+        > * {
+            @include phone {
+                border-bottom: $border;
+            }
+        }
+    }
+}

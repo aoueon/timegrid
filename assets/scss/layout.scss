@@ -1,0 +1,27 @@
+.gap {
+    @include gap(1em);
+}
+.gap-s {
+    @include gap(0.4em);
+}
+.vgap {
+    @include vgap(0.8em);
+}
+
+html {
+    background: $color-bg;
+}
+
+@mixin outer {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+$border: 3px solid $color-dark;
+
+.g-header {
+    padding: 3em;
+    @include outer;
+    text-align: center;
+    border-bottom: $border;
+}
