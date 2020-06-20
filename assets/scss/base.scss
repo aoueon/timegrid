@@ -421,7 +421,7 @@ code {
 // Grid Columns with breakpoint helpers
 @mixin columns-generator($suffix: "") {
     @for $i from 1 to 13 {
-        .of-#{$i}#{$suffix} {
+        .l-grid > .of-#{$i}#{$suffix} {
             width: #{100%/12 * $i};
         }
         .l-grid.of-#{$i}#{$suffix} {

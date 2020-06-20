@@ -3,8 +3,7 @@
     border-radius: 100px;
     height: .5em;
     padding: 1px;
-    &::before {
-        content: "";
+    &-line {
         display: block;
         height: calc(.5em - 2px);
         width: 0;
