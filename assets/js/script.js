@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     timeleft();
-    // setInterval(() => {
-    //     timeleft();
-    // }, 200);
+    setInterval(() => {
+        timeleft();
+    }, 200);
 });
 
 function timeleft() {
