@@ -8,6 +8,6 @@ This tool should help you with the awareness part of it.
 *Still a work in progress.*
 
 ### Left to do
-[ ] Time specs
-[ ] Single view
-[ ] Animations
+- [ ] Time specs
+- [ ] Single view
+- [ ] Animations
