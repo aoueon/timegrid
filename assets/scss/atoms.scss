@@ -1,5 +1,6 @@
 .a-progress {
     background-color: #A39F8B;
+    background-color: hsl(111, 15%, 35%);
     border-radius: 100px;
     height: .5em;
     padding: 1px;
@@ -10,6 +11,7 @@
         min-width: calc(.5em - 2px);
         border-radius: 100px;
         background-color: #9A7C58;
-        box-shadow: 0 0 .5em #FF9900;
+        background-color: hsl(111, 45%, 60%);
+        box-shadow: 0 0 .5em hsl(111, 75%, 70%);
     }
 }

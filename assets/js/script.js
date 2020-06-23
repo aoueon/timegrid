@@ -125,7 +125,7 @@ function timeleft() {
                 secondsLeft = Math.round((end - time) * 0.001);
                 minutesLeft = Math.round(secondsLeft / 60);
                 hoursLeft = Math.round(minutesLeft / 60);
-                daysLeft = Math.floor(hoursLeft / 24);
+                daysLeft = Math.ceil(hoursLeft / 24);
                 item.querySelector('.f-time-specs-d').innerText = numberWithCommas(daysLeft);
                 weeksLeft = Math.floor(daysLeft / 7);
                 item.querySelector('.f-time-specs-w').innerText = numberWithCommas(weeksLeft);
