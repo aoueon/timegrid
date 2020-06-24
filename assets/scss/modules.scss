@@ -54,7 +54,8 @@
             stroke-dashoffset: 566px; // 490px is complete (76 difference)
             transform: rotate(-90deg);
             transform-origin: center;
-            stroke: $color-t;
+            stroke: $color-t; 
+            transition: all 1s ease-out;
         }
     }
     &-specs {

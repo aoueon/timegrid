@@ -18,6 +18,7 @@ function timeleft() {
     const msHour = 3600000,
         msDay = 86400000;
 
+    let itemDelay = 0;
     document.querySelectorAll('.f-time').forEach(item => {
         let type = item.dataset.type,
             amount = 0,
@@ -193,12 +194,13 @@ function timeleft() {
         if (percentage !== 'undefined') {
             item.querySelector('.f-time-percentage').innerText = percentage;
 
-            // circular progress
             var circleAmount = 76 / 100 * percentage;
-            item.querySelector('.f-time-circle-progress').style.strokeDashoffset = (566 - circleAmount) + 'px';
+            setTimeout(() => {
+                item.querySelector('.f-time-circle-progress').style.strokeDashoffset = (566 - circleAmount) + 'px';
+                item.querySelector('.a-progress-line').style.width = percentage + '%';
+            }, 10 + itemDelay);
 
-            // bar progrss
-            item.querySelector('.a-progress-line').style.width = percentage + '%';
+            itemDelay += 150;
         }
     });
 }
