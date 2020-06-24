@@ -146,18 +146,46 @@ function timeleft() {
                 }
                 diff = time - start;
                 amount = diff / (end - start);
+
+                secondsLeft = Math.round((end - time) * 0.001);
+                minutesLeft = Math.round(secondsLeft / 60);
+                hoursLeft = Math.round(minutesLeft / 60);
+                daysLeft = Math.ceil(hoursLeft / 24);
+                weeksLeft = Math.floor(daysLeft / 7);
+                item.querySelector('.f-time-specs-w').innerText = numberWithCommas(weeksLeft);
+                monthsLeft = Math.floor(daysLeft / 30);
+                item.querySelector('.f-time-specs-mo').innerText = numberWithCommas(monthsLeft);
+                yearsLeft = Math.floor(monthsLeft / 12);
+                item.querySelector('.f-time-specs-y').innerText = numberWithCommas(yearsLeft);
+
                 break;
             case 'century':
                 start = new Date(2001, 0).getTime();
                 end = new Date(2101, 0).getTime();
                 diff = time - start;
                 amount = diff / (end - start);
+
+                secondsLeft = Math.round((end - time) * 0.001);
+                minutesLeft = Math.round(secondsLeft / 60);
+                hoursLeft = Math.round(minutesLeft / 60);
+                daysLeft = Math.ceil(hoursLeft / 24);
+                monthsLeft = Math.floor(daysLeft / 30);
+                item.querySelector('.f-time-specs-mo').innerText = numberWithCommas(monthsLeft);
+                yearsLeft = Math.floor(monthsLeft / 12);
+                item.querySelector('.f-time-specs-y').innerText = numberWithCommas(yearsLeft);
+                decadesLeft = Math.floor(yearsLeft / 10);
+                item.querySelector('.f-time-specs-de').innerText = numberWithCommas(decadesLeft);
+
                 break;
             case 'millenium':
-                start = new Date(2001, 0).getTime();
-                end = new Date(3001, 0).getTime();
-                diff = time - start;
-                amount = diff / (end - start);
+                start = 2001;
+                end = 3001;
+                diff = year - start;
+                amount = diff / 1000;
+                item.querySelector('.f-time-specs-y').innerText = numberWithCommas(end - year);
+                item.querySelector('.f-time-specs-de').innerText = numberWithCommas(Math.floor((end - year)/10));
+                item.querySelector('.f-time-specs-c').innerText = numberWithCommas(Math.floor((end - year) / 100));
+
                 break;
         }
 
