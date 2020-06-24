@@ -1,3 +1,6 @@
 .DS_Store
-.sass_cache/*
-.gitignore
+.sass_cache
+*.scssc
+*.map
+style.css.map
+style.css.map

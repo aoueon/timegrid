@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     timeleft();
     setInterval(() => {
         timeleft();
-    }, 200);
+    }, 40);
 });
 
 function timeleft() {
@@ -18,29 +18,60 @@ function timeleft() {
     const msHour = 3600000,
         msDay = 86400000;
 
+    let itemDelay = 0;
     document.querySelectorAll('.f-time').forEach(item => {
         let type = item.dataset.type,
             amount = 0,
             ms = 0,
             start = 0,
             end = 0,
-            diff = 0;
+            diff = 0,
+            msLeft = 0,
+            secondsLeft = 0,
+            minutesLeft = 0,
+            hoursLeft = 0,
+            weeeksLeft = 0,
+            monthsLeft = 0;
+        
         switch (type) {
             case 'hour':
                 start = new Date(year, month, day, hour).getTime();
                 end = start + msHour;
                 diff = time - start;
                 amount = diff / msHour;
+
+                msLeft = Math.round((end - time));
+                item.querySelector('.f-time-specs-ms').innerText = numberWithCommas(msLeft);
+                secondsLeft = Math.floor((end - time) * 0.001);
+                item.querySelector('.f-time-specs-s').innerText = numberWithCommas(secondsLeft);
+                minutesLeft = Math.ceil(secondsLeft/60);
+                item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
+
                 break;
             case 'day':
                 start = new Date(year, month, day).getTime();
                 end = start + msDay;
                 diff = time - start;
                 amount = diff / msDay;
+
+                secondsLeft = Math.round((end - time) * 0.001);
+                item.querySelector('.f-time-specs-s').innerText = numberWithCommas(secondsLeft);
+                minutesLeft = Math.round(secondsLeft / 60);
+                item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
+                hoursLeft = Math.round(minutesLeft / 60);
+                item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
+
                 break;
             case 'week':
-                if ( weekday == 0 ) {
+                if ( weekday == 1 ) {
                     start = new Date(year, month, day).getTime();
+                } else if ( weekday == 0 ) {
+                    let monday = day - 6;
+                    if (monday >= 0) {
+                        start = new Date(year, month, monday).getTime();
+                    } else {
+                        start = new Date(year, month).getTime() - (msDay * (monday * -1));
+                    }
                 } else {
                     let monday = day - weekday + 1;
                     if (monday >= 0) {
@@ -52,6 +83,15 @@ function timeleft() {
                 end = start + (msDay * 7);
                 diff = time - start;
                 amount = diff / (end - start);
+
+                secondsLeft = Math.round((end - time) * 0.001);
+                minutesLeft = Math.round(secondsLeft / 60);
+                item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
+                hoursLeft = Math.round(minutesLeft / 60);
+                item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
+                daysLeft = Math.floor(hoursLeft / 24);
+                item.querySelector('.f-time-specs-d').innerText = numberWithCommas(daysLeft);
+
                 break;
             case 'month':
                 start = new Date(year, month).getTime();
@@ -62,6 +102,15 @@ function timeleft() {
                 }
                 diff = time - start;
                 amount = diff / (end - start);
+
+                secondsLeft = Math.round((end - time) * 0.001);
+                minutesLeft = Math.round(secondsLeft / 60);
+                item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
+                hoursLeft = Math.round(minutesLeft / 60);
+                item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
+                daysLeft = Math.floor(hoursLeft / 24);
+                item.querySelector('.f-time-specs-d').innerText = numberWithCommas(daysLeft);
+
                 break;
             case 'year':
                 if (year % 4 === 0 ) {
@@ -73,6 +122,17 @@ function timeleft() {
                 end = new Date(year + 1, 0).getTime();
                 diff = time - start;
                 amount = diff / (end - start);
+
+                secondsLeft = Math.round((end - time) * 0.001);
+                minutesLeft = Math.round(secondsLeft / 60);
+                hoursLeft = Math.round(minutesLeft / 60);
+                daysLeft = Math.ceil(hoursLeft / 24);
+                item.querySelector('.f-time-specs-d').innerText = numberWithCommas(daysLeft);
+                weeksLeft = Math.floor(daysLeft / 7);
+                item.querySelector('.f-time-specs-w').innerText = numberWithCommas(weeksLeft);
+                monthsLeft = Math.floor(daysLeft / 30);
+                item.querySelector('.f-time-specs-mo').innerText = numberWithCommas(monthsLeft);
+
                 break;
             case 'decade':
                 if (yearLastDigit == 1 ) {
@@ -87,18 +147,46 @@ function timeleft() {
                 }
                 diff = time - start;
                 amount = diff / (end - start);
+
+                secondsLeft = Math.round((end - time) * 0.001);
+                minutesLeft = Math.round(secondsLeft / 60);
+                hoursLeft = Math.round(minutesLeft / 60);
+                daysLeft = Math.ceil(hoursLeft / 24);
+                weeksLeft = Math.floor(daysLeft / 7);
+                item.querySelector('.f-time-specs-w').innerText = numberWithCommas(weeksLeft);
+                monthsLeft = Math.floor(daysLeft / 30);
+                item.querySelector('.f-time-specs-mo').innerText = numberWithCommas(monthsLeft);
+                yearsLeft = Math.floor(monthsLeft / 12);
+                item.querySelector('.f-time-specs-y').innerText = numberWithCommas(yearsLeft);
+
                 break;
             case 'century':
                 start = new Date(2001, 0).getTime();
                 end = new Date(2101, 0).getTime();
                 diff = time - start;
                 amount = diff / (end - start);
+
+                secondsLeft = Math.round((end - time) * 0.001);
+                minutesLeft = Math.round(secondsLeft / 60);
+                hoursLeft = Math.round(minutesLeft / 60);
+                daysLeft = Math.ceil(hoursLeft / 24);
+                monthsLeft = Math.floor(daysLeft / 30);
+                item.querySelector('.f-time-specs-mo').innerText = numberWithCommas(monthsLeft);
+                yearsLeft = Math.floor(monthsLeft / 12);
+                item.querySelector('.f-time-specs-y').innerText = numberWithCommas(yearsLeft);
+                decadesLeft = Math.floor(yearsLeft / 10);
+                item.querySelector('.f-time-specs-de').innerText = numberWithCommas(decadesLeft);
+
                 break;
             case 'millenium':
-                start = new Date(2001, 0).getTime();
-                end = new Date(3001, 0).getTime();
-                diff = time - start;
-                amount = diff / (end - start);
+                start = 2001;
+                end = 3001;
+                diff = year - start;
+                amount = diff / 1000;
+                item.querySelector('.f-time-specs-y').innerText = numberWithCommas(end - year);
+                item.querySelector('.f-time-specs-de').innerText = numberWithCommas(Math.floor((end - year)/10));
+                item.querySelector('.f-time-specs-c').innerText = numberWithCommas(Math.floor((end - year) / 100));
+
                 break;
         }
 
@@ -106,27 +194,17 @@ function timeleft() {
         if (percentage !== 'undefined') {
             item.querySelector('.f-time-percentage').innerText = percentage;
 
-            // circular progress
             var circleAmount = 76 / 100 * percentage;
-            item.querySelector('.f-time-circle-progress').style.strokeDashoffset = (566 - circleAmount) + 'px';
+            setTimeout(() => {
+                item.querySelector('.f-time-circle-progress').style.strokeDashoffset = (566 - circleAmount) + 'px';
+                item.querySelector('.a-progress-line').style.width = percentage + '%';
+            }, 10 + itemDelay);
 
-            // bar progrss
-            item.querySelector('.a-progress-line').style.width = percentage + '%';
+            itemDelay += 150;
         }
     });
 }
 
-// function timeleft() {
-//     var d = new Date();
-//     var n = d.getMinutes();
-//     var s = d.getSeconds();
-//     var t = 59 - n;
-//     var tf;
-//     var sl = 59 - s;
-//     var slf;
-//     var percentage = 100 - ((((60 - s) + (t * 60)) / 3600) * 100);
-//     var percentageLeft = (((60 - s) + (t * 60)) / 3600) * 100;
-//     document.querySelector(".time-left").innerHTML = '' + t + '' + '<span class="is-thin">:' + pad(sl, 2) + '</span>';
-//     document.getElementsByClassName('percentage-left-progress')[0].value = percentage;
-//     document.querySelector(".percentage-left").innerHTML = `${Math.floor(percentage)}%`;
-// }
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
