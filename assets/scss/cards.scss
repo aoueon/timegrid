@@ -15,7 +15,9 @@
         }
     }
     transition-duration: .5s;
-    cursor: pointer;
+    &.f-time {
+        cursor: pointer;
+    }
     @include laptop {
         min-height: 0;
     }

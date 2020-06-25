@@ -4,15 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
         timeleft();
     }, 40);
 
-    document.querySelectorAll('.c-card:not(.f-time)').forEach(item => {
-        item.addEventListener('click', () => {
-            document.querySelector('.m-cards').classList.remove('has-active');
-            document.querySelectorAll('.f-time').forEach(card => {
-                card.parentElement.classList.remove('is-hidden');
-                card.parentElement.classList.remove('is-active');
-            });
-        });
-    });
     document.querySelectorAll('.f-time').forEach(item => {
         item.addEventListener('click', () => {
             if ( item.parentElement.classList.contains('is-active') ) {
