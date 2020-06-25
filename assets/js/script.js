@@ -15,13 +15,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.querySelectorAll('.f-time').forEach(item => {
         item.addEventListener('click', () => {
-            document.querySelectorAll('.f-time').forEach(card => {
-                card.parentElement.classList.add('is-hidden');
-                card.parentElement.classList.remove('is-active');
-            });
-            item.parentElement.classList.remove('is-hidden');
-            item.parentElement.classList.add('is-active');
-            document.querySelector('.m-cards').classList.add('has-active');
+            if ( item.parentElement.classList.contains('is-active') ) {
+                document.querySelector('.m-cards').classList.remove('has-active');
+                document.querySelectorAll('.f-time').forEach(card => {
+                    card.parentElement.classList.remove('is-hidden');
+                    card.parentElement.classList.remove('is-active');
+                });
+            } else {
+                document.querySelectorAll('.f-time').forEach(card => {
+                    card.parentElement.classList.add('is-hidden');
+                    card.parentElement.classList.remove('is-active');
+                });
+                item.parentElement.classList.remove('is-hidden');
+                item.parentElement.classList.add('is-active');
+                document.querySelector('.m-cards').classList.add('has-active');
+            }
         });
     });
 });
