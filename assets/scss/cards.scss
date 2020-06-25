@@ -14,6 +14,8 @@
             }
         }
     }
+    transition-duration: .5s;
+    cursor: pointer;
     @include laptop {
         min-height: 0;
     }

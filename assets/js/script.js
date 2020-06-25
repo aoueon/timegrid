@@ -3,6 +3,27 @@ document.addEventListener('DOMContentLoaded', function () {
     setInterval(() => {
         timeleft();
     }, 40);
+
+    document.querySelectorAll('.c-card:not(.f-time)').forEach(item => {
+        item.addEventListener('click', () => {
+            document.querySelector('.m-cards').classList.remove('has-active');
+            document.querySelectorAll('.f-time').forEach(card => {
+                card.parentElement.classList.remove('is-hidden');
+                card.parentElement.classList.remove('is-active');
+            });
+        });
+    });
+    document.querySelectorAll('.f-time').forEach(item => {
+        item.addEventListener('click', () => {
+            document.querySelectorAll('.f-time').forEach(card => {
+                card.parentElement.classList.add('is-hidden');
+                card.parentElement.classList.remove('is-active');
+            });
+            item.parentElement.classList.remove('is-hidden');
+            item.parentElement.classList.add('is-active');
+            document.querySelector('.m-cards').classList.add('has-active');
+        });
+    });
 });
 
 function timeleft() {
@@ -194,10 +215,18 @@ function timeleft() {
         if (percentage !== 'undefined') {
             item.querySelector('.f-time-percentage').innerText = percentage;
 
-            var circleAmount = 76 / 100 * percentage;
+            let circleAmount = 76 / 100 * percentage;
             setTimeout(() => {
                 item.querySelector('.f-time-circle-progress').style.strokeDashoffset = (566 - circleAmount) + 'px';
                 item.querySelector('.a-progress-line').style.width = percentage + '%';
+
+                let dynamicWidth = parseInt(item.querySelector('.a-progress-line').style.width);
+                let hue = Math.floor(199 - (199 / 100 * dynamicWidth));
+                let hueLight = hue + 10;
+                
+                item.querySelector('.a-progress-line').style.backgroundColor = hslToHex(hue, 56, 52);
+                item.querySelector('.a-progress-line').style.boxShadow = '0 0 .5em' + hslToHex(hueLight, 76, 62);
+                item.querySelector('.a-progress').style.backgroundColor = hslToHex(hue, 15, 35);
             }, 10 + itemDelay);
 
             itemDelay += 150;
@@ -207,4 +236,32 @@ function timeleft() {
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function hslToHex(h, s, l) {
+    h /= 360;
+    s /= 100;
+    l /= 100;
+    let r, g, b;
+    if (s === 0) {
+        r = g = b = l; // achromatic
+    } else {
+        const hue2rgb = (p, q, t) => {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 1 / 2) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1 / 3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1 / 3);
+    }
+    const toHex = x => {
+        const hex = Math.round(x * 255).toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+    };
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }

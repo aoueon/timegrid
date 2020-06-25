@@ -648,6 +648,7 @@ code {
     display: flex;
 }
 .is-hidden {
+    display: none;
     @include on-breakpoints() {
         display: none;
     }

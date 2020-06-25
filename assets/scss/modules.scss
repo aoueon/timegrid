@@ -10,6 +10,11 @@
                     }
                 }
             }
+            .c-card {
+                &:hover {
+                    opacity: 1;
+                }
+            }
             &:not(:nth-of-type(3n)) {
                 border-right: $border;
             }
@@ -40,6 +45,11 @@
                     border-right: 0;
                 }
                 border-bottom: $border;
+            }
+            &.is-active {
+                .c-card {
+                    opacity: 1 !important;
+                }
             }
         }
     }
