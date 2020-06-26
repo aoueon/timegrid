@@ -6,12 +6,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.f-time').forEach(item => {
         item.addEventListener('click', () => {
+            let hash = item.dataset.type;
             if ( item.parentElement.classList.contains('is-active') ) {
                 document.querySelector('.m-cards').classList.remove('has-active');
                 document.querySelectorAll('.f-time').forEach(card => {
                     card.parentElement.classList.remove('is-hidden');
                     card.parentElement.classList.remove('is-active');
                 });
+                window.location.hash = '';
             } else {
                 document.querySelectorAll('.f-time').forEach(card => {
                     card.parentElement.classList.add('is-hidden');
@@ -20,9 +22,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 item.parentElement.classList.remove('is-hidden');
                 item.parentElement.classList.add('is-active');
                 document.querySelector('.m-cards').classList.add('has-active');
+                window.location.hash = hash;
             }
         });
     });
+
+    if (window.location.hash) {
+        let hash = window.location.hash.replace('#', '');
+        document.querySelector(`.f-time[data-type="${hash}"]`).click();
+    }
+
 });
 
 function timeleft() {
