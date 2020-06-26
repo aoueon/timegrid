@@ -37,9 +37,6 @@ h5 {
 h6 {
     font-size: 0.55em;
     line-height: 1.5;
-    @include phone {
-        font-size: 0.5em;
-    }
 }
 
 @for $i from 1 to 7 {

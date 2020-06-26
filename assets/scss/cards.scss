@@ -21,4 +21,9 @@
     @include laptop {
         min-height: 0;
     }
+    @include phone {
+        h2 {
+            padding-top: .1em;
+        }
+    }
 }  

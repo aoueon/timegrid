@@ -78,13 +78,19 @@
                 }
             }
         }
+        .c-card {
+            min-height: 0;
+        }
+        .f-time {
+            background-color: #1b1b1b;
+        }
     }
 }
 
 .f-time {
     &-circle {
         &-line {
-            stroke: $color-gray;
+            stroke: #4e4e4e;
         }
         &-progress {
             stroke-dashoffset: 566px; // 490px is complete (76 difference)

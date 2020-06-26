@@ -2,17 +2,17 @@
     background-color: hsl(199, 15%, 35%);
     border-radius: 100px;
     height: .5em;
-    padding: 1px;
     transition-duration: .5s;
     &-line {
         display: block;
-        height: calc(.5em - 2px);
+        height: .5em;
         width: 0px;
-        min-width: calc(.5em - 2px);
+        min-width: .5em;
         border-radius: 100px;
         background-color: #9A7C58;
         background-color: hsl(199, 56%, 52%);
         box-shadow: 0 0 .5em hsl(209, 76%, 82%);
         transition: all .5s ease;
+        border: 1px solid #ffffff36;
     }
 }
