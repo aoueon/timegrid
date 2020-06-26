@@ -1,3 +1,14 @@
+.g-site {
+    min-height: 100vh;
+}
+
+.g-site,
+.g-main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
 .gap {
     @include gap(1em);
     @include phone {
