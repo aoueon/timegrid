@@ -1,13 +1,13 @@
 # Timeleft
-## Don't waste your time
+***Don't waste your time***
 
-Ii is useful to know that time is passing. One tends to consume time on low-return stuff, superficial entertainment, things they don't actually want to do, etc. One should make the most of his time. Get busy living.
+It is useful to know that time is passing. One tends to consume time on low-return stuff, superficial entertainment. Things they don't actually want to do. One should make the most of his time. Get busy living.
 
 This tool will help with the awareness part of it.
 
 ### Features
 
-- **Single View:** If you click on a time box, you can see it in single view. This changes the URL, which you can access directly to see the selected time box in [single view](https://aoueon.github.io/timeleft/#week). To exit the single view, simply click on the box again.
+- **Single View:** If you click on a time box, you can see it in single view. This changes the URL, which you can now access directly to see the selected time box in [single view](https://aoueon.github.io/timeleft/#week). To exit the single view, simply click on the box again.
 - **Time Specs:** Three lines of time specs for every time box will give you more information about the timeleft within the timeframe. The progress bar is for quick time awareness, and the specs are for precision.
 - **Color Coded Urgency:** The progress bars will range from a blue hue to a red one, to signify closeness to the end. 
 
