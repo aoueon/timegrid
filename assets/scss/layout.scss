@@ -1,11 +1,17 @@
 .gap {
     @include gap(1em);
+    @include phone {
+        @include gap(.7em);
+    }
 }
 .gap-s {
     @include gap(0.4em);
 }
 .vgap {
     @include vgap(0.8em);
+    @include phone {
+        @include vgap(.4em);
+    }
 }
 
 html {

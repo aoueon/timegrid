@@ -30,10 +30,16 @@ h4 {
 }
 h5 {
     font-size: 0.7em;
+    @include phone {
+        font-size: 0.6em;
+    }
 }
 h6 {
     font-size: 0.55em;
     line-height: 1.5;
+    @include phone {
+        font-size: 0.5em;
+    }
 }
 
 @for $i from 1 to 7 {
