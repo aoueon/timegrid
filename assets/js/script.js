@@ -32,6 +32,44 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector(`.f-time[data-type="${hash}"]`).click();
     }
 
+    window.addEventListener("keydown", event => {
+        let initial = document.querySelector('.m-cards.has-active .is-active');
+        switch (event.key) {
+            case 'Enter':
+                document.querySelector('.m-cards .l-grid > *:nth-of-type(2) .f-time').click();
+                break;
+            case 'Escape':
+                document.querySelector('.m-cards.has-active .is-active .f-time').click();
+                break;
+            case "Up":
+            case "ArrowUp":
+            case "Left":
+            case "ArrowLeft":
+                let previous = initial.previousElementSibling;
+                if (previous.previousElementSibling !== null ) {
+                    initial.querySelector('.f-time').click();
+                    previous.querySelector('.f-time').click();
+                } else {
+                    initial.querySelector('.f-time').click();
+                    document.querySelector('.m-cards .l-grid > *:nth-of-type(9) .f-time').click();
+                }
+                break;
+            case "Down":
+            case "ArrowDown":
+            case "Right":
+            case "ArrowRight":
+                let next = initial.nextElementSibling;
+                if (next !== null ) {
+                    initial.querySelector('.f-time').click();
+                    next.querySelector('.f-time').click();
+                } else {
+                    initial.querySelector('.f-time').click();
+                    document.querySelector('.m-cards .l-grid > *:nth-of-type(2) .f-time').click();
+                }
+                break;
+        }
+    }, true);
+
 });
 
 function timeleft() {
@@ -73,7 +111,7 @@ function timeleft() {
                 item.querySelector('.f-time-specs-ms').innerText = numberWithCommas(msLeft);
                 secondsLeft = Math.floor((end - time) * 0.001);
                 item.querySelector('.f-time-specs-s').innerText = numberWithCommas(secondsLeft);
-                minutesLeft = Math.ceil(secondsLeft/60);
+                minutesLeft = Math.floor(secondsLeft/60);
                 item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
 
                 break;
@@ -83,11 +121,11 @@ function timeleft() {
                 diff = time - start;
                 amount = diff / msDay;
 
-                secondsLeft = Math.round((end - time) * 0.001);
+                secondsLeft = Math.floor((end - time) * 0.001);
                 item.querySelector('.f-time-specs-s').innerText = numberWithCommas(secondsLeft);
-                minutesLeft = Math.round(secondsLeft / 60);
+                minutesLeft = Math.floor(secondsLeft / 60);
                 item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
-                hoursLeft = Math.round(minutesLeft / 60);
+                hoursLeft = Math.floor(minutesLeft / 60);
                 item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
 
                 break;
@@ -113,10 +151,10 @@ function timeleft() {
                 diff = time - start;
                 amount = diff / (end - start);
 
-                secondsLeft = Math.round((end - time) * 0.001);
-                minutesLeft = Math.round(secondsLeft / 60);
+                secondsLeft = Math.floor((end - time) * 0.001);
+                minutesLeft = Math.floor(secondsLeft / 60);
                 item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
-                hoursLeft = Math.round(minutesLeft / 60);
+                hoursLeft = Math.floor(minutesLeft / 60);
                 item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
                 daysLeft = Math.floor(hoursLeft / 24);
                 item.querySelector('.f-time-specs-d').innerText = numberWithCommas(daysLeft);
@@ -132,10 +170,12 @@ function timeleft() {
                 diff = time - start;
                 amount = diff / (end - start);
 
-                secondsLeft = Math.round((end - time) * 0.001);
-                minutesLeft = Math.round(secondsLeft / 60);
-                item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
-                hoursLeft = Math.round(minutesLeft / 60);
+                secondsLeft = Math.floor((end - time) * 0.001);
+                minutesLeft = Math.floor(secondsLeft / 60);
+                // item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
+                hoursLeft = Math.floor(minutesLeft / 60);
+                item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
+                hoursLeft = Math.floor(minutesLeft / 60);
                 item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
                 daysLeft = Math.floor(hoursLeft / 24);
                 item.querySelector('.f-time-specs-d').innerText = numberWithCommas(daysLeft);
@@ -152,10 +192,10 @@ function timeleft() {
                 diff = time - start;
                 amount = diff / (end - start);
 
-                secondsLeft = Math.round((end - time) * 0.001);
-                minutesLeft = Math.round(secondsLeft / 60);
-                hoursLeft = Math.round(minutesLeft / 60);
-                daysLeft = Math.ceil(hoursLeft / 24);
+                secondsLeft = Math.floor((end - time) * 0.001);
+                minutesLeft = Math.floor(secondsLeft / 60);
+                hoursLeft = Math.floor(minutesLeft / 60);
+                daysLeft = Math.floor(hoursLeft / 24);
                 item.querySelector('.f-time-specs-d').innerText = numberWithCommas(daysLeft);
                 weeksLeft = Math.floor(daysLeft / 7);
                 item.querySelector('.f-time-specs-w').innerText = numberWithCommas(weeksLeft);
@@ -177,10 +217,10 @@ function timeleft() {
                 diff = time - start;
                 amount = diff / (end - start);
 
-                secondsLeft = Math.round((end - time) * 0.001);
-                minutesLeft = Math.round(secondsLeft / 60);
-                hoursLeft = Math.round(minutesLeft / 60);
-                daysLeft = Math.ceil(hoursLeft / 24);
+                secondsLeft = Math.floor((end - time) * 0.001);
+                minutesLeft = Math.floor(secondsLeft / 60);
+                hoursLeft = Math.floor(minutesLeft / 60);
+                daysLeft = Math.floor(hoursLeft / 24);
                 weeksLeft = Math.floor(daysLeft / 7);
                 item.querySelector('.f-time-specs-w').innerText = numberWithCommas(weeksLeft);
                 monthsLeft = Math.floor(daysLeft / 30);
@@ -195,10 +235,10 @@ function timeleft() {
                 diff = time - start;
                 amount = diff / (end - start);
 
-                secondsLeft = Math.round((end - time) * 0.001);
-                minutesLeft = Math.round(secondsLeft / 60);
-                hoursLeft = Math.round(minutesLeft / 60);
-                daysLeft = Math.ceil(hoursLeft / 24);
+                secondsLeft = Math.floor((end - time) * 0.001);
+                minutesLeft = Math.floor(secondsLeft / 60);
+                hoursLeft = Math.floor(minutesLeft / 60);
+                daysLeft = Math.floor(hoursLeft / 24);
                 monthsLeft = Math.floor(daysLeft / 30);
                 item.querySelector('.f-time-specs-mo').innerText = numberWithCommas(monthsLeft);
                 yearsLeft = Math.floor(monthsLeft / 12);

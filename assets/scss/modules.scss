@@ -55,6 +55,8 @@
         }
     }
     &.has-active {
+        width: 100%;
+        max-width: 26em;
         margin: auto;
         display: flex;
         align-items: center;
