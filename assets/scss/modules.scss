@@ -3,16 +3,18 @@
         > * {
             border-bottom: $border;
             @for $var from 1 to 12 {
-                $amount: $var * 0.09;
+                $amount: $var * 0.08;
                 &:nth-of-type(#{$var}) {
                     .c-card {
                         opacity: #{1 - $amount};
                     }
                 }
             }
-            .c-card {
-                &:hover {
-                    opacity: 1;
+            @include phone-up {
+                .c-card {
+                    &:hover {
+                        opacity: 1;
+                    }
                 }
             }
             &:not(:nth-of-type(3n)) {

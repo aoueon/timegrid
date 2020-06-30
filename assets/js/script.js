@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.f-time').forEach(item => {
         item.addEventListener('click', () => {
             let hash = item.dataset.type;
-            if ( item.parentElement.classList.contains('is-active') ) {
+            if (item.parentElement.classList.contains('is-active')) {
                 document.querySelector('.m-cards').classList.remove('has-active');
                 document.querySelectorAll('.f-time').forEach(card => {
                     card.parentElement.classList.remove('is-hidden');
@@ -26,6 +26,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+
+    window.onhashchange = () => {
+        let hash = window.location.hash;
+        if (!hash.length) {
+            document.querySelector('.m-cards').classList.remove('has-active');
+            document.querySelectorAll('.f-time').forEach(card => {
+                card.parentElement.classList.remove('is-hidden');
+                card.parentElement.classList.remove('is-active');
+            });
+        }
+    }
 
     if (window.location.hash) {
         let hash = window.location.hash.replace('#', '');
@@ -46,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             case "Left":
             case "ArrowLeft":
                 let previous = initial.previousElementSibling;
-                if (previous.previousElementSibling !== null ) {
+                if (previous.previousElementSibling !== null) {
                     initial.querySelector('.f-time').click();
                     previous.querySelector('.f-time').click();
                 } else {
@@ -59,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
             case "Right":
             case "ArrowRight":
                 let next = initial.nextElementSibling;
-                if (next !== null ) {
+                if (next !== null) {
                     initial.querySelector('.f-time').click();
                     next.querySelector('.f-time').click();
                 } else {
@@ -81,7 +93,7 @@ function timeleft() {
         hour = now.getHours(),
         time = now.getTime(),
         yearLastDigit = year.toString().substring(3);
-    
+
     const msHour = 3600000,
         msDay = 86400000;
 
@@ -99,7 +111,7 @@ function timeleft() {
             hoursLeft = 0,
             weeeksLeft = 0,
             monthsLeft = 0;
-        
+
         switch (type) {
             case 'hour':
                 start = new Date(year, month, day, hour).getTime();
@@ -111,7 +123,7 @@ function timeleft() {
                 item.querySelector('.f-time-specs-ms').innerText = numberWithCommas(msLeft);
                 secondsLeft = Math.floor((end - time) * 0.001);
                 item.querySelector('.f-time-specs-s').innerText = numberWithCommas(secondsLeft);
-                minutesLeft = Math.floor(secondsLeft/60);
+                minutesLeft = Math.floor(secondsLeft / 60);
                 item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
 
                 break;
@@ -130,9 +142,9 @@ function timeleft() {
 
                 break;
             case 'week':
-                if ( weekday == 1 ) {
+                if (weekday == 1) {
                     start = new Date(year, month, day).getTime();
-                } else if ( weekday == 0 ) {
+                } else if (weekday == 0) {
                     let monday = day - 6;
                     if (monday >= 0) {
                         start = new Date(year, month, monday).getTime();
@@ -162,7 +174,7 @@ function timeleft() {
                 break;
             case 'month':
                 start = new Date(year, month).getTime();
-                if ( month == 11 ) {
+                if (month == 11) {
                     end = new Date((year + 1), 0).getTime();
                 } else {
                     end = new Date(year, (month + 1)).getTime();
@@ -172,7 +184,7 @@ function timeleft() {
 
                 secondsLeft = Math.floor((end - time) * 0.001);
                 minutesLeft = Math.floor(secondsLeft / 60);
-                // item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
+                item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
                 hoursLeft = Math.floor(minutesLeft / 60);
                 item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
                 hoursLeft = Math.floor(minutesLeft / 60);
@@ -182,7 +194,7 @@ function timeleft() {
 
                 break;
             case 'year':
-                if (year % 4 === 0 ) {
+                if (year % 4 === 0) {
                     days = 366;
                 } else {
                     days = 365;
@@ -204,7 +216,7 @@ function timeleft() {
 
                 break;
             case 'decade':
-                if (yearLastDigit == 1 ) {
+                if (yearLastDigit == 1) {
                     start = new Date(year, 0).getTime();
                     end = new Date((year + 10), 0).getTime();
                 } else if (yearLastDigit == 0) {
@@ -253,7 +265,7 @@ function timeleft() {
                 diff = year - start;
                 amount = diff / 1000;
                 item.querySelector('.f-time-specs-y').innerText = numberWithCommas(end - year);
-                item.querySelector('.f-time-specs-de').innerText = numberWithCommas(Math.floor((end - year)/10));
+                item.querySelector('.f-time-specs-de').innerText = numberWithCommas(Math.floor((end - year) / 10));
                 item.querySelector('.f-time-specs-c').innerText = numberWithCommas(Math.floor((end - year) / 100));
 
                 break;
@@ -271,7 +283,7 @@ function timeleft() {
                 let dynamicWidth = parseInt(item.querySelector('.a-progress-line').style.width);
                 let hue = Math.floor(199 - (199 / 100 * dynamicWidth));
                 let hueLight = hue + 10;
-                
+
                 item.querySelector('.a-progress-line').style.backgroundColor = hslToHex(hue, 56, 52);
                 item.querySelector('.a-progress-line').style.boxShadow = '0 0 .5em' + hslToHex(hueLight, 76, 62);
                 item.querySelector('.a-progress').style.backgroundColor = hslToHex(hue, 15, 35);
