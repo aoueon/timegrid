@@ -17,6 +17,7 @@ h3 {
     line-height: 1;
 }
 h1 {
+    text-transform: none;
     font-size: 5em;
 }
 h2 {
@@ -52,9 +53,28 @@ h6 {
 
 a {
     // border-bottom: 2px solid $color-gray;
-    text-decoration: line-through;
-    text-decoration-thickness: 1.5px;
     &:hover {
         text-decoration: underline;
     }
+}
+
+.option {
+    &:not(.option-active) {
+        opacity: 0.35;
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+    &.option-active {
+        &:hover {
+            cursor: default;
+        }
+    }
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.h5 + .h6 {
+    margin-top: 10px;
 }

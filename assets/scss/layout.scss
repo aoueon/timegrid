@@ -12,7 +12,7 @@
 .gap {
     @include gap(1em);
     @include phone {
-        @include gap(.7em);
+        @include gap(0.7em);
     }
 }
 .gap-s {
@@ -21,7 +21,13 @@
 .vgap {
     @include vgap(0.8em);
     @include phone {
-        @include vgap(.4em);
+        @include vgap(0.4em);
+    }
+}
+.vgap-s {
+    @include vgap(0.4em);
+    @include phone {
+        @include vgap(0.2em);
     }
 }
 
@@ -46,4 +52,59 @@ $border: 3px solid $color-dark;
 .g-footer {
     border-top: $border;
     margin-top: -3px;
+}
+
+.g-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    transition-duration: 0.3s;
+    &:not(.is-active) {
+        opacity: 0;
+        pointer-events: none;
+    }
+    background-color: rgba(black, .5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+}
+.modal {
+    margin: auto;
+    width: 100%;
+    max-width: 500px;
+    background-color: #333;
+    padding: 25px;
+    border-radius: 10px;
+    &-header {
+        margin-bottom: 15px;
+        padding-right: 50px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+        h2 {
+            font-size: 22px;
+        }
+    }
+    &-body,
+    &-footer {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+    &-body {
+        display: flex;
+        flex-direction: column;
+        gap: .618rem;
+        a {
+            text-decoration: underline;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+    &-footer {
+        margin-top: 30px;
+    }
 }

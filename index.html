@@ -4,28 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timeleft</title>
+    <title>TimeGRID</title>
+    <meta name="description" content="Measure how much time you have left. A visual representation of hours, days, weeks, months, years, etc. Use in full-screen as a screensaver.">
     <link rel="stylesheet" href="style.css">
     <script src="assets/js/script.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-9801451-23"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-343X1MTTF7"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'UA-9801451-23');
+        gtag('config', 'G-343X1MTTF7');
     </script>
-    <script data-ad-client="ca-pub-5733704026794555" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/media/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/media/favicon/favicon-16x16.png">
-    <link rel="manifest" href="assets/media/favicon/site.webmanifest">
-    <link rel="mask-icon" href="assets/media/favicon/safari-pinned-tab.svg" color="#000000">
-    <link rel="shortcut icon" href="assets/media/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
+    <meta name="apple-mobile-web-app-title" content="TimeGRID">
+    <meta name="application-name" content="TimeGRID">
     <meta name="msapplication-TileColor" content="#000000">
-    <meta name="msapplication-config" content="assets/media/favicon/browserconfig.xml">
     <meta name="theme-color" content="#000000">
 </head>
 
@@ -38,14 +37,17 @@
                     <div class="of-12-laptop">
                         <div class="c-card vgap">
                             <div class="h-fill vgap">
-                                <h1 class="h4">Timeleft</h1>
+                                <h1 class="h4">TimeGRID</h1>
                                 <p class="h5">Don't waste your time.</p>
                                 <div></div>
                             </div>
+                            <div class="h5 l-stack vgap-s">
+                                <div class="js-option" data-option="week">Week starts on <a href="#" class="option option-1">SUNDAY</a> <a href="#" class="option option-2">MONDAY</a> </div>
+                                <div class="js-option" data-option="decade">Decade starts at <a href="#" class="option option-1">00</a> <a href="#" class="option option-2">01</a> </div>
+                            </div>
                             <div class="h6 l-stack">
-                                <div>+ More info on <a href="https://github.com/aoueon/timeleft">GitHub</a></div>
-                                <div>+ Built by <a href="mailto:raulsimionas@gmail.com">Raoul Simionas</a></div>
-                                <div>+ Buy me a <a href="https://www.buymeacoffee.com/raoul">coffee</a></div>
+                                <div>+ <a href="mailto:raulsimionas@gmail.com" target="_blank">Contact</a> / <a href="https://www.buymeacoffee.com/raoul" target="_blank">Buy Me A Coffee</a></div>
+                                <div>+ <a href="#" class="toggle-privacy">Privacy & Cookies Policy</a></div>
                             </div>
                         </div>
                     </div>
@@ -236,12 +238,12 @@
                                 <div>
                                     <div class="h5 text-right">
                                         <div class="f-time-specs l-stack">
-                                            <span><span class="f-time-specs-m">0</span> <span
-                                                    class="t-gray">MN</span></span>
                                             <span><span class="f-time-specs-h">0</span> <span
                                                     class="t-gray">HR</span></span>
                                             <span><span class="f-time-specs-d">0</span> <span
                                                     class="t-gray">DA</span></span>
+                                            <span><span class="f-time-specs-w">0</span> <span
+                                                    class="t-gray">WK</span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -449,6 +451,26 @@
             </div>
         </main>
     </div>
+
+    <aside id="privacy" class="g-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Privacy & Cookies Policy</h2>
+            </div>
+            <div class="modal-body">
+                <p>TimeGRID is a web tool built by Raoul Simionas.</p>
+                <p>We guarantee you a safe use of your personal data. We track our users for analytics, advertising and performance purposes. We store geographic data, device data, page views, and other data of this kind.</p>
+                <p>Your data is anonymous and will never be used outside of the scope mentioned above.</p>
+                <p>We use cookies to allow us to track this data. We also use cookies to store any available app settings. You can rest assured they benefit the user.</p>
+                <p>To learn more about cookies and how they work, please read more at <a href="https://gdpr.eu/cookies/" target="_blank">gdpr.eu</a>.</p>
+                <p>Thank you for checking out our app.</p>
+                <p>If you have any questions or suggestions, please contact us at <a href="mailto:raulsimionas@gmail.com" target="_blank">raulsimionas@gmail.com</a>.</p>
+            </div>
+            <div class="modal-footer">
+                <p><a href="#" class="close-privacy">[Hide this]</a></p>
+            </div>
+        </div>
+    </aside>
 
 </body>
 

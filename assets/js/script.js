@@ -1,8 +1,83 @@
+let firstDaySunday = false;
+let decadeStartsZero = false;
+
+if (getCookie('timegrid_week_start') && getCookie('timegrid_week_start') == '1') {
+    firstDaySunday = true;
+}
+if (getCookie('timegrid_decade_starts') && getCookie('timegrid_decade_starts') == '1') {
+    decadeStartsZero = true;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+
+
     timeleft();
     setInterval(() => {
         timeleft();
-    }, 40);
+    }, 80);
+
+    document.querySelectorAll('.js-option').forEach(item => {
+        let type = item.dataset.option;
+        switch (type) {
+            case 'week':
+                if (getCookie('timegrid_week_start') && getCookie('timegrid_week_start') == '1') {
+                    item.querySelector('.option-1').classList.add('option-active');
+                } else {
+                    item.querySelector('.option-2').classList.add('option-active');
+                }
+                break;
+            case 'decade':
+                if (getCookie('timegrid_decade_starts') && getCookie('timegrid_decade_starts') == '1') {
+                    item.querySelector('.option-1').classList.add('option-active');
+                } else {
+                    item.querySelector('.option-2').classList.add('option-active');
+                }
+                break;
+        }
+    });
+
+    document.querySelector('.js-option[data-option="week"] .option-1').addEventListener('click', e => {
+        e.preventDefault();
+        createCookie('timegrid_week_start', '1', 999);
+        document.querySelector('.js-option[data-option="week"] .option-1').classList.add('option-active');
+        document.querySelector('.js-option[data-option="week"] .option-2').classList.remove('option-active');
+        firstDaySunday = true;
+    });
+    document.querySelector('.js-option[data-option="week"] .option-2').addEventListener('click', e => {
+        e.preventDefault();
+        deleteCookie('timegrid_week_start', '1', 999);
+        document.querySelector('.js-option[data-option="week"] .option-1').classList.remove('option-active');
+        document.querySelector('.js-option[data-option="week"] .option-2').classList.add('option-active');
+        firstDaySunday = false;
+    });
+    
+    document.querySelector('.js-option[data-option="decade"] .option-1').addEventListener('click', e => {
+        e.preventDefault();
+        createCookie('timegrid_decade_starts', '1', 999);
+        document.querySelector('.js-option[data-option="decade"] .option-1').classList.add('option-active');
+        document.querySelector('.js-option[data-option="decade"] .option-2').classList.remove('option-active');
+        decadeStartsZero = true;
+    });
+    document.querySelector('.js-option[data-option="decade"] .option-2').addEventListener('click', e => {
+        e.preventDefault();
+        deleteCookie('timegrid_decade_starts', '1', 999);
+        document.querySelector('.js-option[data-option="decade"] .option-1').classList.remove('option-active');
+        document.querySelector('.js-option[data-option="decade"] .option-2').classList.add('option-active');
+        decadeStartsZero = false;
+    });
+    
+    document.querySelector('.toggle-privacy').addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector('#privacy').classList.toggle('is-active');
+    });
+    document.querySelector('#privacy').addEventListener('click', (e) => {
+        if (e.target == e.currentTarget ) {
+            document.querySelector('#privacy').classList.remove('is-active');   
+        }
+    });
+    document.querySelector('.close-privacy').addEventListener('click', (e) => {
+        document.querySelector('#privacy').classList.remove('is-active');   
+    });
 
     document.querySelectorAll('.f-time').forEach(item => {
         item.addEventListener('click', () => {
@@ -84,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+
 function timeleft() {
     let now = new Date(),
         year = now.getFullYear(),
@@ -93,6 +169,10 @@ function timeleft() {
         hour = now.getHours(),
         time = now.getTime(),
         yearLastDigit = year.toString().substring(3);
+
+    if (firstDaySunday) {
+        weekday = now.getDay() + 1;
+    }
 
     const msHour = 3600000,
         msDay = 86400000;
@@ -109,7 +189,7 @@ function timeleft() {
             secondsLeft = 0,
             minutesLeft = 0,
             hoursLeft = 0,
-            weeeksLeft = 0,
+            weeksLeft = 0,
             monthsLeft = 0;
 
         switch (type) {
@@ -184,13 +264,15 @@ function timeleft() {
 
                 secondsLeft = Math.floor((end - time) * 0.001);
                 minutesLeft = Math.floor(secondsLeft / 60);
-                item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
-                hoursLeft = Math.floor(minutesLeft / 60);
-                item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
+                // item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
+                // hoursLeft = Math.floor(minutesLeft / 60);
+                // item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
                 hoursLeft = Math.floor(minutesLeft / 60);
                 item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
                 daysLeft = Math.floor(hoursLeft / 24);
                 item.querySelector('.f-time-specs-d').innerText = numberWithCommas(daysLeft);
+                weeksLeft = Math.floor(daysLeft / 7);
+                item.querySelector('.f-time-specs-w').innerText = numberWithCommas(weeksLeft);
 
                 break;
             case 'year':
@@ -216,15 +298,19 @@ function timeleft() {
 
                 break;
             case 'decade':
+                decadeYear = year;
+                if (decadeStartsZero) {
+                    decadeYear = year - 1;
+                }
                 if (yearLastDigit == 1) {
-                    start = new Date(year, 0).getTime();
-                    end = new Date((year + 10), 0).getTime();
+                    start = new Date(decadeYear, 0).getTime();
+                    end = new Date((decadeYear + 10), 0).getTime();
                 } else if (yearLastDigit == 0) {
-                    start = new Date((year - 9), 0).getTime();
-                    end = new Date((year + 1), 0).getTime();
+                    start = new Date((decadeYear - 9), 0).getTime();
+                    end = new Date((decadeYear + 1), 0).getTime();
                 } else {
-                    start = new Date((year - (yearLastDigit - 1)), 0).getTime();
-                    end = new Date((year + (11 - yearLastDigit)), 0).getTime();
+                    start = new Date((decadeYear - (yearLastDigit - 1)), 0).getTime();
+                    end = new Date((decadeYear + (11 - yearLastDigit)), 0).getTime();
                 }
                 diff = time - start;
                 amount = diff / (end - start);
@@ -244,6 +330,10 @@ function timeleft() {
             case 'century':
                 start = new Date(2001, 0).getTime();
                 end = new Date(2101, 0).getTime();
+                if ( decadeStartsZero ) {
+                    start = new Date(2000, 0).getTime();
+                    end = new Date(2100, 0).getTime();
+                }
                 diff = time - start;
                 amount = diff / (end - start);
 
@@ -262,6 +352,10 @@ function timeleft() {
             case 'millenium':
                 start = 2001;
                 end = 3001;
+                if (decadeStartsZero) {
+                    start = 2000;
+                    end = 3000;
+                }
                 diff = year - start;
                 amount = diff / 1000;
                 item.querySelector('.f-time-specs-y').innerText = numberWithCommas(end - year);
@@ -324,4 +418,36 @@ function hslToHex(h, s, l) {
         return hex.length === 1 ? '0' + hex : hex;
     };
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
+
+function createCookie(name, value, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) {
+                c_end = document.cookie.length;
+            }
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
+
+function deleteCookie(name) {
+    createCookie(name, '', -1, '/');
 }

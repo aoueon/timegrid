@@ -102,3 +102,10 @@
     &-specs {
     }
 }
+
+.m-cards.has-active .c-card > .h-fill ~ * {
+    display: none;
+}
+.m-cards.has-active .c-card > .h-fill div:empty {
+    display: none;
+}
