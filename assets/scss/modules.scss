@@ -3,7 +3,7 @@
         > * {
             border-bottom: $border;
             @for $var from 1 to 12 {
-                $amount: $var * 0.08;
+                $amount: $var * 0.05;
                 &:nth-of-type(#{$var}) {
                     .c-card {
                         opacity: #{1 - $amount};

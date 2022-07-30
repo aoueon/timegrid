@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     timeleft();
     setInterval(() => {
         timeleft();
-    }, 80);
+    }, 123);
 
     document.querySelectorAll('.js-option').forEach(item => {
         let type = item.dataset.option;
@@ -164,11 +164,18 @@ function timeleft() {
     let now = new Date(),
         year = now.getFullYear(),
         month = now.getMonth(),
+        millenium = Math.ceil((year + 1) / 1000),
+        century = Math.ceil((year + 1) / 100),
+        decade = Math.ceil((year + 1) / 10),
         weekday = now.getDay(),
         day = now.getDate(),
         hour = now.getHours(),
         time = now.getTime(),
         yearLastDigit = year.toString().substring(3);
+    
+    var firstDayOfYear = new Date(year, 0, 1);
+    var numberOfDays = Math.floor((now - firstDayOfYear) / (24 * 60 * 60 * 1000));
+    let week = Math.ceil((weekday + 1 + numberOfDays) / 7);
 
     if (firstDaySunday) {
         weekday = now.getDay() + 1;
@@ -206,6 +213,8 @@ function timeleft() {
                 minutesLeft = Math.floor(secondsLeft / 60);
                 item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
 
+                item.querySelector('.a-progress-text').innerText = hour;
+
                 break;
             case 'day':
                 start = new Date(year, month, day).getTime();
@@ -219,6 +228,8 @@ function timeleft() {
                 item.querySelector('.f-time-specs-m').innerText = numberWithCommas(minutesLeft);
                 hoursLeft = Math.floor(minutesLeft / 60);
                 item.querySelector('.f-time-specs-h').innerText = numberWithCommas(hoursLeft);
+
+                item.querySelector('.a-progress-text').innerText = day;
 
                 break;
             case 'week':
@@ -251,6 +262,8 @@ function timeleft() {
                 daysLeft = Math.floor(hoursLeft / 24);
                 item.querySelector('.f-time-specs-d').innerText = numberWithCommas(daysLeft);
 
+                item.querySelector('.a-progress-text').innerText = week;
+
                 break;
             case 'month':
                 start = new Date(year, month).getTime();
@@ -274,6 +287,8 @@ function timeleft() {
                 weeksLeft = Math.floor(daysLeft / 7);
                 item.querySelector('.f-time-specs-w').innerText = numberWithCommas(weeksLeft);
 
+                item.querySelector('.a-progress-text').innerText = month + 1;
+
                 break;
             case 'year':
                 if (year % 4 === 0) {
@@ -295,6 +310,8 @@ function timeleft() {
                 item.querySelector('.f-time-specs-w').innerText = numberWithCommas(weeksLeft);
                 monthsLeft = Math.floor(daysLeft / 30);
                 item.querySelector('.f-time-specs-mo').innerText = numberWithCommas(monthsLeft);
+
+                item.querySelector('.a-progress-text').innerText = year;
 
                 break;
             case 'decade':
@@ -326,6 +343,8 @@ function timeleft() {
                 yearsLeft = Math.floor(monthsLeft / 12);
                 item.querySelector('.f-time-specs-y').innerText = numberWithCommas(yearsLeft);
 
+                item.querySelector('.a-progress-text').innerText = decade;
+
                 break;
             case 'century':
                 start = new Date(2001, 0).getTime();
@@ -348,6 +367,8 @@ function timeleft() {
                 decadesLeft = Math.floor(yearsLeft / 10);
                 item.querySelector('.f-time-specs-de').innerText = numberWithCommas(decadesLeft);
 
+                item.querySelector('.a-progress-text').innerText = century;
+
                 break;
             case 'millenium':
                 start = 2001;
@@ -361,6 +382,8 @@ function timeleft() {
                 item.querySelector('.f-time-specs-y').innerText = numberWithCommas(end - year);
                 item.querySelector('.f-time-specs-de').innerText = numberWithCommas(Math.floor((end - year) / 10));
                 item.querySelector('.f-time-specs-c').innerText = numberWithCommas(Math.floor((end - year) / 100));
+
+                item.querySelector('.a-progress-text').innerText = millenium;
 
                 break;
         }

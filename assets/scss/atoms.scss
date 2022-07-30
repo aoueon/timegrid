@@ -1,18 +1,31 @@
 .a-progress {
     background-color: hsl(199, 15%, 35%);
     border-radius: 100px;
-    height: .5em;
-    transition-duration: .5s;
+    height: 1em;
+    transition-duration: 0.5s;
+    position: relative;
+    &-text {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        font-size: 11px;
+        color: white;
+        padding-inline: 10.5px;
+        display: flex;
+        align-items: center;
+    }
     &-line {
         display: block;
-        height: .5em;
+        height: 1em;
         width: 0px;
-        min-width: .5em;
+        min-width: 1.14em;
         border-radius: 100px;
-        background-color: #9A7C58;
+        background-color: #9a7c58;
         background-color: hsl(199, 56%, 52%);
-        box-shadow: 0 0 .5em hsl(209, 76%, 82%);
-        transition: all .5s ease;
+        box-shadow: 0 0 0.5em hsl(209, 76%, 82%);
+        transition: all 0.5s ease;
         border: 1px solid #ffffff36;
     }
 }
